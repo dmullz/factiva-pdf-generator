@@ -12,4 +12,5 @@ Output PDF is stored in the pdf folder.
 # Example
 
 python factiva-pdf-generator.py "The Wall Street Journal" "Example Title Here"
+
 File named "Example Title Here.txt" exists in this folder.

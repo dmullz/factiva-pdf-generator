@@ -5,7 +5,7 @@ from datetime import timezone, datetime
 import fpdf
 from fpdf import FPDF
 import PyPDF2
-#fpdf.set_global("SYSTEM_TTFONTS", os.path.join(os.path.dirname(__file__),'fonts'))
+fpdf.set_global("SYSTEM_TTFONTS", os.path.join(os.path.dirname(__file__),'fonts'))
 
 
 class PDF(FPDF):
@@ -55,10 +55,10 @@ def build_pdf(magazine, title, text):
 	wm_logo = "wm-logo"
 	mag_logo = re.sub(r'[^\w\.\-]','',magazine).lower()
 	pdf = PDF()
-	pdf.add_font("NotoSans", style="", fname="./fonts/NotoSans-Regular.ttf", uni=True)
-	pdf.add_font("NotoSans", style="B", fname="./fonts/NotoSans-Bold.ttf", uni=True)
-	pdf.add_font("NotoSans", style="I", fname="./fonts/NotoSans-Italic.ttf", uni=True)
-	pdf.add_font("NotoSans", style="BI", fname="./fonts/NotoSans-BoldItalic.ttf", uni=True)
+	pdf.add_font("NotoSans", style="", fname="NotoSans-Regular.ttf", uni=True)
+	pdf.add_font("NotoSans", style="B", fname="NotoSans-Bold.ttf", uni=True)
+	pdf.add_font("NotoSans", style="I", fname="NotoSans-Italic.ttf", uni=True)
+	pdf.add_font("NotoSans", style="BI", fname="NotoSans-BoldItalic.ttf", uni=True)
 	pdf.add_page()
 	pdf.image(mag_logo+".png",h=15)
 	pdf.set_font('NotoSans', 'B', 18)

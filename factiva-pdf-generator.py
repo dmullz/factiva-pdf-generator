@@ -82,7 +82,7 @@ def build_pdf(magazine, title, date, author, text):
 	pdf.add_font("NotoSans", style="BI", fname="./fonts/NotoSans-BoldItalic.ttf", uni=True)
 	pdf.add_page()
 	
-	if mag_logo == "thewallstreetjournal":
+	if "thewallstreetjournal" in mag_logo:
 		pdf.image(mag_logo+".png",h=24)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,33,200,33)
@@ -120,7 +120,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.ln(2)
 		pdf.multi_cell(0,10, "By " + author, align='C')
 		
-	if mag_logo == "newswire":
+	if mag_logo == "newswire" or mag_logo == "newswires":
 		pdf.image("newswire.jpg",w=190)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,30,200,30)
@@ -132,7 +132,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.multi_cell(0,10, title, align='C')
 		pdf.ln(5)
 		
-	if mag_logo == "newswiregerman":
+	if mag_logo == "newswiregerman" or mag_logo == "newswiresgerman":
 		pdf.image("newswire.jpg",w=190)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,30,200,30)

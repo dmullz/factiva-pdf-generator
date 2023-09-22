@@ -83,7 +83,7 @@ def build_pdf(magazine, title, date, author, text):
 	pdf.add_page()
 	
 	if "thewallstreetjournal" in mag_logo:
-		pdf.image(mag_logo+".png",h=24)
+		pdf.image("thewallstreetjournal.png",h=24)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,33,200,33)
 		pdf.set_y(30)

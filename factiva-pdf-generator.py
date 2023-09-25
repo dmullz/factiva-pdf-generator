@@ -94,8 +94,8 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.multi_cell(0,10, title, align='C')
 		pdf.ln(5)
 		
-	if mag_logo == "barrons":
-		pdf.image(mag_logo+".png",h=24)
+	if "barrons" in mag_logo:
+		pdf.image("barrons.png",h=24)
 		pdf.set_font('Times', 'B', 10)
 		pdf.set_y(30)
 		pdf.cell(0,10,article_date.strftime('%B %e, %Y').upper(),0,0,'R')
@@ -120,7 +120,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.ln(2)
 		pdf.multi_cell(0,10, "By " + author, align='C')
 		
-	if mag_logo == "newswire" or mag_logo == "newswires":
+	if "newswire" in mag_logo and "german" not in mag_logo:
 		pdf.image("newswire.jpg",w=190)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,30,200,30)
@@ -132,7 +132,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.multi_cell(0,10, title, align='C')
 		pdf.ln(5)
 		
-	if mag_logo == "newswiregerman" or mag_logo == "newswiresgerman":
+	if "newswire" in mag_logo and "german" in mag_logo:
 		pdf.image("newswire.jpg",w=190)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,30,200,30)

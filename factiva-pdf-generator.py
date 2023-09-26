@@ -120,7 +120,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.ln(2)
 		pdf.multi_cell(0,10, "By " + author, align='C')
 		
-	if "newswire" in mag_logo and "german" not in mag_logo:
+	if ("newswire" in mag_logo or mag_logo == "dowjonesinstitutionalnews") and "german" not in mag_logo:
 		pdf.image("newswire.jpg",w=190)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,30,200,30)

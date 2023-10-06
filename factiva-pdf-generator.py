@@ -93,6 +93,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
 		pdf.ln(5)
+		article = "By " + author + "\n\n" + article
 		
 	if "barrons" in mag_logo:
 		pdf.image("barrons.png",h=24)
@@ -150,7 +151,10 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.multi_cell(0,10, title, align='C')
 		pdf.set_font('Times', 'B', 10)
 		pdf.ln(7)
-		article = "By " + author + "\n" + article_date.strftime('%B %e, %Y') + "\n\n" + article
+		if "marketwatch" in author.lower():
+			article = article_date.strftime('%B %e, %Y') + "\n\n" + article
+		else:
+			article = "By " + author + "\n" + article_date.strftime('%B %e, %Y') + "\n\n" + article
 		
 	if mag_logo == "privateequitynews":
 		pdf.image(mag_logo+".png",x=30, h=22)
@@ -167,9 +171,12 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.multi_cell(0,10, "			By " + author, align='L')
 	
 	pdf.y0 = pdf.get_y()
-	pdf.set_font("NotoSans", size=10)
+	if "thewallstreetjournal" in mag_logo:
+		pdf.set_font("NotoSans", size=8)
+	else:
+		pdf.set_font("NotoSans", size=10)
 	if(len(article) > 3250):
-		pdf.multi_cell(60,5,article)
+		pdf.multi_cell(60,5,article,align='L')
 	else:
 		pdf.three_col = False
 		pdf.multi_cell(0,5,article)

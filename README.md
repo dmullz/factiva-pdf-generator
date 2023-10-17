@@ -2,7 +2,7 @@
 
 Run factiva-pdf-generator.py with 2 arguments
 Argument 1 is the magazine name
-Argument 2 is the full article title
+Argument 2 is the full article title with " changed to '
 Argument 3 is the article publish date (YYYYMMDD)
 Argument 4 is the article author
 

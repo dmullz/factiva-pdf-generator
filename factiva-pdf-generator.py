@@ -181,7 +181,7 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.three_col = False
 		pdf.multi_cell(0,5,article)
 		
-	pdf_name = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(title[:50])))+'_base.pdf'
+	pdf_name = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(title)))[:50]+'_base.pdf'
 	pdf.output(pdf_name)
 	return pdf_name
 	
@@ -213,7 +213,7 @@ def get_article_text(file_name_base):
 		return f.read()
 	
 
-file_name_base = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(sys.argv[2])[:50]))
+file_name_base = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(sys.argv[2])))[:50]
 article_text = get_article_text(file_name_base)
 pdf_name = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],article_text)
 merge_pdf(pdf_name)

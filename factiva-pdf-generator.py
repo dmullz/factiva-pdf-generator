@@ -96,7 +96,7 @@ def build_pdf(magazine, title, date, author, text):
 		article = "By " + author + "\n\n" + article
 		
 	if "barrons" in mag_logo:
-		pdf.image("barrons.png",h=24)
+		pdf.image("barrons.png",x=58,h=24)
 		pdf.set_font('Times', 'B', 10)
 		pdf.set_y(30)
 		pdf.cell(0,10,article_date.strftime('%B %e, %Y').upper(),0,0,'R')

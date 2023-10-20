@@ -83,7 +83,7 @@ def build_pdf(magazine, title, date, author, text):
 	pdf.add_page()
 	
 	if "thewallstreetjournal" in mag_logo:
-		pdf.image("thewallstreetjournal.png",h=24)
+		pdf.image("thewallstreetjournal.png",x=15,h=24)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,33,200,33)
 		pdf.set_y(30)
@@ -157,7 +157,7 @@ def build_pdf(magazine, title, date, author, text):
 			article = "By " + author + "\n" + article_date.strftime('%B %e, %Y') + "\n\n" + article
 		
 	if mag_logo == "privateequitynews":
-		pdf.image(mag_logo+".png",x=30, h=22)
+		pdf.image(mag_logo+".png",x=60, h=22)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,33,200,33)
 		pdf.set_y(30)

@@ -80,17 +80,16 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,37,200,37)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(5)
 		article = "By " + author + "\n\n" + article
 		
 	if "barrons" in mag_logo:
 		pdf.image("barrons.png",x=58,h=24)
-		pdf.set_font('Times', 'B', 10)
 		pdf.set_font('Times', 'B', 10)
 		pdf.line(10,37,200,37)
 		pdf.set_y(34)
@@ -98,14 +97,14 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,41,200,41)
 		pdf.set_font('NotoSans', 'B', size=18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(2)
 		pdf.set_font('Times', 'B', 10)
-		pdf.multi_cell(0,10, "BY " + author.upper(), align='C')
+		pdf.multi_cell(0,9, "BY " + author.upper(), align='C')
 		
 	if mag_logo == "financialnews":
 		pdf.image(mag_logo+".png",x=12)
@@ -116,14 +115,14 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,41,200,41)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(2)
 		pdf.set_font('Times', 'B', 10)
-		pdf.multi_cell(0,10, "By " + author, align='C')
+		pdf.multi_cell(0,9, "By " + author, align='C')
 		
 	if ("newswire" in mag_logo or mag_logo == "dowjonesinstitutionalnews") and "german" not in mag_logo:
 		pdf.image("newswire.jpg",w=190)
@@ -134,11 +133,11 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,34,200,34)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(5)
 		article = "By " + author + "\n\n" + article
 		
@@ -151,11 +150,11 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,34,200,34)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(5)
 		
 	if mag_logo == "marketwatch":
@@ -167,11 +166,11 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,45,200,45)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(5)
 		if "marketwatch" not in author.lower():
 			article = "By " + author + "\n\n" + article
@@ -185,14 +184,14 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.line(10,37,200,37)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
-		pdf.multi_cell(0,10, title, align='C')
+		pdf.multi_cell(0,9, title, align='C')
 		if len(subtitle)>0:
 			pdf.ln(2)
 			pdf.set_font('NotoSans', 'B', 12)
-			pdf.multi_cell(0,10, subtitle, align='C')
+			pdf.multi_cell(0,7, subtitle, align='C')
 		pdf.ln(2)
 		pdf.set_font('Times', 'B', 10)
-		pdf.multi_cell(0,10, "			By " + author, align='L')
+		pdf.multi_cell(0,9, "			By " + author, align='L')
 	
 	pdf.y0 = pdf.get_y()
 	if "thewallstreetjournal" in mag_logo:

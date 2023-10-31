@@ -44,7 +44,7 @@ class PDF(FPDF):
 		self.cell(0,10,"The Publisher's Sale Of This Reprint Does Not Constitute or imply any endoresement or sponsorship of any product, service, company or organization",0,0,'C')
 		self.set_y(-15)
 		self.set_x(10)
-		self.cell(0,10,"Custom Reprints (800)803-9100 P.O. Box 300 Princeton, NJ 08543-0300. Do not edit or alter reprints, reproductions not permitted",0,0,'C')
+		self.cell(0,10,"Custom Reprints (800) 803-9100 P.O. Box 300 Princeton, NJ 08543-0300. Do not edit or alter reprints, reproductions not permitted",0,0,'C')
 		self.line(10,289,200,289)
 		self.set_y(-10)
 		self.set_x(10)
@@ -58,7 +58,7 @@ def remove_non_ascii(text):
 # @PARAM: record - dictionary of article data
 # @PARAM: cos_apikey - Cloud Object Storage apikey
 # @RET: Boolean of success or failure of PDF building
-def build_pdf(magazine, title, date, author, text):
+def build_pdf(magazine, title, date, author, text, subtitle):
 	article_date = datetime.strptime(date, '%Y%m%d').date()
 	article = re.sub(r"no title\s*\n*", "", re.sub(r"'''","'",remove_non_ascii(text)))
 	wm_logo = "wm-logo"
@@ -81,6 +81,10 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
 		pdf.ln(5)
 		article = "By " + author + "\n\n" + article
 		
@@ -95,8 +99,12 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', size=18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
-		pdf.set_font('Times', 'B', 10)
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
 		pdf.ln(2)
+		pdf.set_font('Times', 'B', 10)
 		pdf.multi_cell(0,10, "BY " + author.upper(), align='C')
 		
 	if mag_logo == "financialnews":
@@ -109,8 +117,12 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
+		pdf.ln(2)
 		pdf.set_font('Times', 'B', 10)
-		pdf.ln(5)
 		pdf.multi_cell(0,10, "By " + author, align='C')
 		
 	if ("newswire" in mag_logo or mag_logo == "dowjonesinstitutionalnews") and "german" not in mag_logo:
@@ -123,6 +135,10 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
 		pdf.ln(5)
 		article = "By " + author + "\n\n" + article
 		
@@ -136,6 +152,10 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
 		pdf.ln(5)
 		
 	if mag_logo == "marketwatch":
@@ -148,7 +168,10 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
-		pdf.set_font('Times', 'B', 10)
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
 		pdf.ln(5)
 		if "marketwatch" not in author.lower():
 			article = "By " + author + "\n\n" + article
@@ -163,8 +186,12 @@ def build_pdf(magazine, title, date, author, text):
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,10, title, align='C')
-		pdf.set_font('Times', 'B', 10)
+		if len(subtitle)>0:
+			pdf.ln(2)
+			pdf.set_font('NotoSans', 'B', 12)
+			pdf.multi_cell(0,10, subtitle, align='C')
 		pdf.ln(2)
+		pdf.set_font('Times', 'B', 10)
 		pdf.multi_cell(0,10, "			By " + author, align='L')
 	
 	pdf.y0 = pdf.get_y()
@@ -212,7 +239,7 @@ def get_article_text(file_name_base):
 
 file_name_base = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(sys.argv[2])))[:50]
 article_text = get_article_text(file_name_base)
-pdf_name = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],article_text)
+pdf_name = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],article_text, sys.argv[5] if len(sys.argv) > 5 else "")
 merge_pdf(pdf_name)
 os.remove(pdf_name)
 os.remove(file_name_base+'.txt')

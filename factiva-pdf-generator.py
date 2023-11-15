@@ -41,10 +41,10 @@ class PDF(FPDF):
 		self.set_font('Times', 'B', 8)
 		self.set_y(-18)
 		self.set_x(10)
-		self.cell(0,10,"The Publisher's Sale Of This Reprint Does Not Constitute or imply any endoresement or sponsorship of any product, service, company or organization",0,0,'C')
+		self.cell(0,10,"The Publisher's Sale Of This Reprint Does Not Constitute or imply any endorsement or sponsorship of any product, service, company or organization",0,0,'C')
 		self.set_y(-15)
 		self.set_x(10)
-		self.cell(0,10,"Custom Reprints (800) 803-9100 P.O. Box 300 Princeton, NJ 08543-0300. Do not edit or alter reprints, reproductions not permitted",0,0,'C')
+		self.cell(0,10,"Custom Reprints (800) 803-9100  www.djreprints.com. Do not edit or alter reprints, reproductions not permitted",0,0,'C')
 		self.line(10,289,200,289)
 		self.set_y(-10)
 		self.set_x(10)
@@ -63,7 +63,7 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 	article = re.sub(r"no title\s*\n*", "", re.sub(r"'''","'",remove_non_ascii(text)))
 	wm_logo = "wm-logo"
 	mag_logo = re.sub(r'[^\w\.\-]','',magazine).lower()
-	pdf = PDF()
+	pdf = PDF(format="Letter")
 	pdf.magazine = mag_logo
 	pdf.add_font("NotoSans", style="", fname="./fonts/NotoSans-Regular.ttf", uni=True)
 	pdf.add_font("NotoSans", style="B", fname="./fonts/NotoSans-Bold.ttf", uni=True)

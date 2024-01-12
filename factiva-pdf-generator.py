@@ -37,7 +37,7 @@ class PDF(FPDF):
 			return True
 			
 	def footer(self):
-		self.line(10,282,200,282)
+		self.line(10,264,200,264)
 		self.set_font('Times', 'B', 8)
 		self.set_y(-18)
 		self.set_x(10)
@@ -45,7 +45,7 @@ class PDF(FPDF):
 		self.set_y(-15)
 		self.set_x(10)
 		self.cell(0,10,"Custom Reprints (800) 803-9100  www.djreprints.com. Do not edit or alter reprints, reproductions not permitted",0,0,'C')
-		self.line(10,289,200,289)
+		self.line(10,271,200,271)
 		self.set_y(-10)
 		self.set_x(10)
 		self.cell(0,10,u'\u00A9'+" "+ str(datetime.now().year)+" "+self.publisher,0,0,'C')
@@ -58,7 +58,7 @@ def remove_non_ascii(text):
 # @PARAM: record - dictionary of article data
 # @PARAM: cos_apikey - Cloud Object Storage apikey
 # @RET: Boolean of success or failure of PDF building
-def build_pdf(magazine, title, date, author, text, subtitle):
+def build_pdf(magazine, title, pdf_file_name, date, author, text, subtitle):
 	article_date = datetime.strptime(date, '%Y%m%d').date()
 	article = re.sub(r"no title\s*\n*", "", re.sub(r"'''","'",remove_non_ascii(text)))
 	wm_logo = "wm-logo"
@@ -158,12 +158,12 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.ln(5)
 		
 	if mag_logo == "marketwatch":
-		pdf.image(mag_logo+".png",w=190)
+		pdf.image(mag_logo+".png",x=25,w=160)
 		pdf.set_font('Times', 'B', 10)
-		pdf.line(10,41,200,41)
-		pdf.set_y(38)
+		pdf.line(10,37,200,37)
+		pdf.set_y(34)
 		pdf.cell(0,10,article_date.strftime('%B %e, %Y').upper(),0,0,'L')
-		pdf.line(10,45,200,45)
+		pdf.line(10,41,200,41)
 		pdf.set_font('NotoSans', 'B', 18)
 		pdf.ln(10)
 		pdf.multi_cell(0,9, title, align='C')
@@ -204,7 +204,7 @@ def build_pdf(magazine, title, date, author, text, subtitle):
 		pdf.three_col = False
 		pdf.multi_cell(0,5,article)
 		
-	pdf_name = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(title)))[:50]+'_base.pdf'
+	pdf_name = str(file_name_base)+'_base.pdf'
 	pdf.output(pdf_name)
 	return pdf_name
 	
@@ -236,9 +236,9 @@ def get_article_text(file_name_base):
 		return f.read()
 	
 
-file_name_base = re.sub(r"[^A-Za-z0-9 ]",'',remove_non_ascii(str(sys.argv[2])))[:50]
+file_name_base = str(sys.argv[3])
 article_text = get_article_text(file_name_base)
-pdf_name = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],article_text, sys.argv[5] if len(sys.argv) > 5 else "")
+pdf_name = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],article_text,sys.argv[6] if len(sys.argv) > 5 else "")
 merge_pdf(pdf_name)
-os.remove(pdf_name)
+os.replace(pdf_name, "pdf/Final Versions/"+re.sub(r'_base','',pdf_name))
 os.remove(file_name_base+'.txt')

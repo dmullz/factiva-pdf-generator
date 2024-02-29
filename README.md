@@ -13,10 +13,19 @@ To pass the article text, create a text file containing the article text, and pl
 The file name should be the first 50 characters of the article title with punctuation and whitespaces stripped, followed by .txt
 This file name should be passed as Argument 3 above
 
-Output PDF is stored in the pdf folder.
+Output PDF with watermark is stored in the pdf folder.
+Output PDF without watermark is stored in the pdf/FinalVersions folder
+
+Total number of pages in the PDF will be output when execution is complete
 
 # Example
 
 python factiva-pdf-generator.py "Barron's" "Example Title Here" "ExampleTitleHere" "20230901" "Jacob Sonenshine" "Example Subtitle Here"
 
 File named "ExampleTitleHere.txt" exists in this folder.
+
+
+Sample Execution and output of Page Count is shown below:
+
+PS C:\Users\dange\git\factiva-pdf-generator> python factiva-pdf-generator.py "Barron's" "Example Title Here" "ExampleTitleHere" "20230901" "Jacob Sonenshine" "Example Subtitle Here"
+5

@@ -205,8 +205,9 @@ def build_pdf(magazine, title, pdf_file_name, date, author, text, subtitle):
 		pdf.multi_cell(0,5,article)
 		
 	pdf_name = str(file_name_base)+'_base.pdf'
+	pdf_pages = pdf.page_no()
 	pdf.output(pdf_name)
-	return pdf_name
+	return pdf_name, pdf_pages
 	
 
 # @DEV: Adds watermark to PDF by merging with a watermark PDF
@@ -238,7 +239,8 @@ def get_article_text(file_name_base):
 
 file_name_base = str(sys.argv[3])
 article_text = get_article_text(file_name_base)
-pdf_name = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],article_text,sys.argv[6] if len(sys.argv) > 5 else "")
+pdf_name, pdf_pages = build_pdf(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],article_text,sys.argv[6] if len(sys.argv) > 5 else "")
 merge_pdf(pdf_name)
-os.replace(pdf_name, "pdf/Final Versions/"+re.sub(r'_base','',pdf_name))
+os.replace(pdf_name, "pdf/FinalVersions/"+re.sub(r'_base','',pdf_name))
 os.remove(file_name_base+'.txt')
+print(pdf_pages)
